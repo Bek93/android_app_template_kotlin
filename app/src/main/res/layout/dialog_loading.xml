@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+>
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+                name="baseViewModel"
+                type="net.wepla.campus_planet.base.BaseViewModel"/>
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ProgressBar
+                android:id="@+id/prograss_dialog"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:background="@android:color/transparent"
+                android:backgroundDimEnabled="true"
+                android:theme="@style/CircularProgress"
+                android:visibility="@{baseViewModel.isLoading? View.VISIBLE: View.GONE}"/>
+    </RelativeLayout>
+</layout>

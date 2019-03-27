@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">campus_android</string>
+    <string name="meta_cancel">죄소</string>
+    <string name="meta_done">확인</string>
+</resources>
