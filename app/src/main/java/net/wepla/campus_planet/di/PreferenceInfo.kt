@@ -6,4 +6,4 @@ import javax.inject.Qualifier
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-annotation class PreferecenInfo
+annotation class PreferenceInfo

@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BaseDataManager @Inject
+open class BaseDataManager @Inject
 constructor(private val context: Context, private val preferencesManager: PreferencesManager) : BaseDataManagerImp {
 
     override fun getAccessToken(): AuthResponse {
