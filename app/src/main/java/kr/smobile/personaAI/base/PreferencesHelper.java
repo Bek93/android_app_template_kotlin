@@ -1,7 +1,7 @@
-package net.wepla.campus_planet.base;
+package kr.smobile.personaAI.base;
 
-import net.wepla.campus_planet.model.AuthResponse;
-import net.wepla.campus_planet.model.Profile;
+import kr.smobile.personaAI.model.AuthResponse;
+import kr.smobile.personaAI.model.User;
 
 public interface PreferencesHelper {
 
@@ -14,8 +14,12 @@ public interface PreferencesHelper {
 
     void setSignedIn(boolean signedIn);
 
-    Profile getUser();
+    String getUserId();
 
-    void setUser(Profile user);
+    void setUserId(String userId);
+
+    User getUser();
+
+    void setUser(User user);
 
 }

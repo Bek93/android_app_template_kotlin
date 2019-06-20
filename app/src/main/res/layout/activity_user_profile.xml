@@ -2,6 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable name="user" type="kr.smobile.personaAI.model.User"/>
+        <variable name="viewModel" type="kr.smobile.personaAI.view.indepth.IndepthViewModel"/>
 
     </data>
 
@@ -11,11 +13,48 @@
             android:layout_height="match_parent">
 
 
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/actionBar"
+                style="@style/ChatTabDetailsTheme"
+                android:layout_width="match_parent"
+                android:background="@color/timeline_bg"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#282828"
+                    android:id="@+id/actionbarTitle"
+                    android:letterSpacing="-0.02"
+                    android:text=""
+            />
+
+
+            <ImageView android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/menu_dots"
+                       android:padding="10dp"
+                       android:clickable="true"
+                       android:id="@+id/menu"
+                       android:layout_marginRight="10dp"
+                       android:background="?attr/selectableItemBackground"
+                       android:layout_gravity="end"
+            />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
         <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="67dp"
                 android:layout_height="67dp"
                 android:src="@drawable/profile_img"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/actionBar"
                 android:layout_marginTop="19dp"
                 android:id="@+id/profileImage"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +71,7 @@
                 android:textColor="#555555"
                 android:letterSpacing="-0.03"
                 android:gravity="center_horizontal"
-                android:text="yeo123"
+                android:text="@{user.name}"
                 android:id="@+id/userName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,15 +83,16 @@
                 android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#ffffff"
+                android:textColor="@color/following_text_color"
                 android:letterSpacing="-0.03"
-                android:background="@drawable/login_button_bg"
+                android:background="@drawable/following_button_selector"
                 android:gravity="center_horizontal"
-                android:text="프로필 편집"
-                android:id="@+id/profileEdit"
+                android:text="팔로우"
+                android:id="@+id/followButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="8dp"
+                android:onClick="@{()->viewModel.followUser()}"
                 android:paddingTop="5dp"
                 android:paddingBottom="7dp"
                 android:clickable="true"
@@ -66,7 +106,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/white"
                 android:id="@+id/infoPanel"
-                app:layout_constraintTop_toBottomOf="@id/profileEdit"
+                app:layout_constraintTop_toBottomOf="@id/followButton"
                 android:layout_marginTop="20dp"
         >
 
@@ -89,7 +129,7 @@
                         android:textColor="#2c2c2c"
                         android:letterSpacing="-0.03"
                         android:gravity="center_horizontal"
-                        android:text="14"
+                        android:text="@{String.valueOf(user.count_book)}"
                 />
                 <TextView
                         android:layout_width="match_parent"
@@ -128,7 +168,7 @@
                         android:textColor="#2c2c2c"
                         android:letterSpacing="-0.03"
                         android:gravity="center_horizontal"
-                        android:text="3,342"
+                        android:text="@{String.valueOf(user.count_following)}"
                 />
                 <TextView
                         android:layout_width="match_parent"
@@ -166,7 +206,7 @@
                         android:textColor="#2c2c2c"
                         android:letterSpacing="-0.03"
                         android:gravity="center_horizontal"
-                        android:text="3,342"
+                        android:text="@{String.valueOf(user.count_follower)}"
                 />
                 <TextView
                         android:layout_width="match_parent"
@@ -181,106 +221,50 @@
 
 
         </LinearLayout>
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="11sp"
-                android:fontFamily="sans-serif-medium"
-                android:textStyle="normal"
-                android:textColor="#e5644c"
-                android:paddingLeft="15dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                app:layout_constraintTop_toBottomOf="@+id/infoPanel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:letterSpacing="-0.03"
-                android:text="페르소나 관리"
-                android:id="@+id/title1"
-        />
+
 
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="48dp"
-                      android:background="@drawable/profile_item_click"
+                      android:layout_height="43dp"
+                      android:orientation="horizontal"
+                      android:id="@+id/title1"
+                      android:gravity="center"
+                      app:layout_constraintTop_toBottomOf="@+id/infoPanel"
                       app:layout_constraintStart_toStartOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
-                      android:paddingLeft="16dp"
-                      android:id="@+id/personaPanel"
-                      android:clickable="true"
-                      android:paddingRight="16dp"
-                      app:layout_constraintTop_toBottomOf="@id/title1"
-
         >
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:textColor="#555555"
                     android:letterSpacing="-0.02"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="대표 페르소나"
+                    android:gravity="center_horizontal"
+                    android:text="@{user.name}"
             />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:src="@drawable/profile_img_1"
-                    android:layout_gravity="center"
-            />
-            <ImageView android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center"
-                       android:layout_marginRight="5dp"
-                       android:src="@drawable/next_right_profile"
-            />
-        </LinearLayout>
 
-        <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="11sp"
-                android:fontFamily="sans-serif-medium"
-                android:textStyle="normal"
-                android:textColor="#e5644c"
-                android:paddingLeft="15dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
-                app:layout_constraintTop_toBottomOf="@+id/personaPanel"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:letterSpacing="-0.03"
-                android:text="나의 게시물"
-                android:id="@+id/title2"
-        />
-
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="48dp"
-                      app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      android:paddingLeft="16dp"
-                      android:background="@drawable/profile_item_click"
-                      android:clickable="true"
-                      android:id="@+id/timelinePanel"
-                      android:paddingRight="16dp"
-                      app:layout_constraintTop_toBottomOf="@id/title2"
-        >
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    android:textColor="#000000"
+                    android:textSize="13sp"
+                    android:textColor="#555555"
                     android:letterSpacing="-0.02"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="나의 타임라인"
+                    android:gravity="center_horizontal"
+                    android:text="님의 스토리 작품"
             />
-            <ImageView android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_gravity="center"
-                       android:layout_marginRight="5dp"
-                       android:src="@drawable/next_right_profile"
-            />
+
         </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/title1"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

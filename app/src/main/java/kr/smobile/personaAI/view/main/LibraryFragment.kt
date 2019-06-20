@@ -5,9 +5,10 @@ import kr.smobile.personaAI.BR
 import kr.smobile.personaAI.R
 import kr.smobile.personaAI.base.BaseFragment
 import kr.smobile.personaAI.databinding.FragmentChatBinding
+import kr.smobile.personaAI.databinding.FragmentLibraryBinding
 import javax.inject.Inject
 
-class LibraryFragment : BaseFragment<FragmentChatBinding, MainViewModel>(), MainNavigator {
+class LibraryFragment : BaseFragment<FragmentLibraryBinding, MainViewModel>(), MainNavigator {
 
 
     @Inject
@@ -16,7 +17,7 @@ class LibraryFragment : BaseFragment<FragmentChatBinding, MainViewModel>(), Main
     override val bindingVariable: Int
         get() = BR.viewModel
     override val layoutId: Int
-        get() = R.layout.fragment_chat
+        get() = R.layout.fragment_library
     override val viewModel: MainViewModel
         get() = mainViewModel
 

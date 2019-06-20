@@ -8,7 +8,7 @@
 
         <variable
                 name="baseViewModel"
-                type="net.wepla.campus_planet.base.BaseViewModel"/>
+                type="kr.smobile.personaAI.base.BaseViewModel"/>
     </data>
 
     <RelativeLayout

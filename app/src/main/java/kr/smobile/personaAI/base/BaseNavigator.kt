@@ -1,6 +1,7 @@
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
-import net.wepla.campus_planet.utils.Intented
+import android.content.Intent
+import kr.smobile.personaAI.utils.Intented
 
 
 interface BaseNavigator {
@@ -79,4 +80,9 @@ interface BaseNavigator {
     fun showDialogMessageAndFinish(message: String)
 
     fun onRefreshData()
+
+
+    fun openNextActivity(intent: Intent)
+
+    fun finishActivityFromViewModel()
 }

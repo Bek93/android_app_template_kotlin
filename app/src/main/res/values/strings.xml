@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">campus_android</string>
+    <string name="app_name">Smobile-Dev</string>
     <string name="meta_cancel">죄소</string>
     <string name="meta_done">확인</string>
+    <string name="empty"/>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="follow_list_title">팔로우 목록</string>
+    <string name="indepth_title">전체보기</string>
+    <string name="liked_title">좋아요</string>
 </resources>

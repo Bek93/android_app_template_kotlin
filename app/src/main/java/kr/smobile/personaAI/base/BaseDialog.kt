@@ -14,7 +14,7 @@
  *  limitations under the License
  */
 
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
 import android.app.Dialog
 import android.content.Context
@@ -30,13 +30,12 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import net.wepla.campus_planet.R
-import net.wepla.campus_planet.utils.Intented
+import kr.smobile.personaAI.utils.Intented
 import java.io.Serializable
 import java.util.*
 
 /**
- * Created by amitshekhar on 10/07/17.
+ * Created by Bek on 12/06/19.
  */
 
 abstract class BaseDialog : DialogFragment(), BaseNavigator {
@@ -69,14 +68,14 @@ abstract class BaseDialog : DialogFragment(), BaseNavigator {
     }
 
 
-    fun isDialogShowFull(): Boolean = true
+    open fun isDialogShowFull(): Boolean = true
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         // the content
         val root = RelativeLayout(activity)
         root.layoutParams = ViewGroup.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
@@ -87,7 +86,7 @@ abstract class BaseDialog : DialogFragment(), BaseNavigator {
         if (dialog.window != null) {
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.window!!.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
@@ -114,7 +113,7 @@ abstract class BaseDialog : DialogFragment(), BaseNavigator {
     }
 
 
-    override fun openNextActivityClearTop(intented: Intented) {
+    override fun openNextActivityClearTop(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             val intent = Intent(baseActivity, Class.forName(intented.getName()))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -169,6 +168,7 @@ abstract class BaseDialog : DialogFragment(), BaseNavigator {
     }
 
 
+
     fun openNextActivityWithData(nextActivity: Class<*>, serializabledObject: Serializable) {
         val intent = Intent(context, nextActivity)
         intent.putExtra("data", serializabledObject)
@@ -176,7 +176,7 @@ abstract class BaseDialog : DialogFragment(), BaseNavigator {
     }
 
 
-    override fun openNextActivity(intented: Intented) {
+    override fun openNextActivity(intented:Intented) {
         baseActivity!!.openNextActivity(intented)
     }
 

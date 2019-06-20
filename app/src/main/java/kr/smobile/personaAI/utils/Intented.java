@@ -1,8 +1,15 @@
-package net.wepla.campus_planet.utils;
+package kr.smobile.personaAI.utils;
 
+
+import kr.smobile.personaAI.view.indepth.PostLikedUserListActivity;
+import kr.smobile.personaAI.view.indepth.FindUserActivity;
+import kr.smobile.personaAI.view.main.MainActivity;
 
 public enum Intented {
-    test("test");
+
+    ToFindUserActivity(FindUserActivity.class.getName()),
+    ToPostLikedByUserActivity(PostLikedUserListActivity.class.getName()),
+    ToMainActivity(MainActivity.class.getName());
 
    /* ToLoginActivity(LoginActivity.class.getName()),
     ToForgetActivity(ResetPasswordActivity.class.getName()),

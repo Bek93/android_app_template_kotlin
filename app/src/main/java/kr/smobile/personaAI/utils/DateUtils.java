@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.utils;
+package kr.smobile.personaAI.utils;
 
 import java.util.Calendar;
 import java.util.Date;

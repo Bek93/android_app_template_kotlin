@@ -1,4 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewModel" type="kr.smobile.personaAI.view.indepth.IndepthViewModel"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+    >
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/actionBar"
+                style="@style/ChatTabDetailsTheme"
+                android:layout_width="match_parent"
+                android:background="@color/timeline_bg"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="#282828"
+                    android:id="@+id/actionbarTitle"
+                    android:fontFamily="@font/bangers_regular"
+                    android:letterSpacing="-0.02"
+                    android:text=""
+            />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fillViewport="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/actionBar"
+        >
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+            >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/topPanel"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                    >
+                        <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="33dp"
+                                android:layout_height="33dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="16dp"
+                                android:id="@+id/profileImage"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_gravity="center_vertical"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:src="@drawable/profile_img"
+                        />
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="14sp"
+                                android:fontFamily="sans-serif"
+                                android:textStyle="bold"
+                                android:textColor="#555555"
+                                android:letterSpacing="-0.02"
+                                android:id="@+id/userName"
+                                android:text="김서영"
+                                android:layout_marginLeft="10dp"
+                                app:layout_constraintTop_toTopOf="@+id/profileImage"
+                                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                        />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="11sp"
+                                android:fontFamily="sans-serif"
+                                android:textStyle="normal"
+                                android:textColor="#d1d1d1"
+                                android:letterSpacing="-0.05"
+                                android:text="2019.01.04"
+                                app:layout_constraintTop_toBottomOf="@id/userName"
+                                app:layout_constraintStart_toStartOf="@+id/userName"
+                        />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <ImageView android:layout_width="match_parent"
+                               android:layout_height="1dp"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintStart_toStartOf="parent"
+                               android:id="@+id/topLine"
+                               android:layout_marginTop="14dp"
+                               android:background="@color/line"
+                               app:layout_constraintTop_toBottomOf="@+id/topPanel"
+                    />
+
+
+                    <ImageView android:layout_width="match_parent"
+                               android:layout_height="151dp"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintStart_toStartOf="parent"
+                               app:layout_constraintTop_toBottomOf="@id/topLine"
+                               android:src="@drawable/wreck_it_ralph"
+                               android:id="@+id/mainImage"
+                    />
+                    <ImageView android:layout_width="match_parent"
+                               android:layout_height="1dp"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               android:background="@color/line"
+                               app:layout_constraintStart_toStartOf="parent"
+                               android:id="@+id/middleLine"
+                               app:layout_constraintTop_toBottomOf="@+id/mainImage"
+                    />
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="11sp"
+                            android:fontFamily="sans-serif"
+                            android:id="@+id/likeCount"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:padding="10dp"
+                            android:onClick="@{()->viewModel.openLikedPage()}"
+                            app:layout_constraintTop_toBottomOf="@+id/middleLine"
+                            android:letterSpacing="-0.05"
+                            android:text="좋아요 121개"
+                    />
+
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="13sp"
+                            android:textColor="#000000"
+                            android:letterSpacing="-0.02"
+                            android:lineSpacingExtra="10sp"
+                            android:id="@+id/mainContent"
+
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:padding="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/likeCount"
+                            android:text="맨인블랙이 개봉했다는 사실,,, 오늘 날씨도 우중충한데 맨인블랙 보러가야겠어요..ㅎㅎㅎ"
+                    />
+
+                    <ImageView android:layout_width="match_parent"
+                               android:layout_height="1dp"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               android:background="@color/line"
+                               android:layout_marginTop="15dp"
+                               app:layout_constraintStart_toStartOf="parent"
+                               android:id="@+id/bottomPanel"
+                               app:layout_constraintTop_toBottomOf="@+id/mainContent"
+                    />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/bottomPanel"
+
+                    />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView android:layout_width="match_parent"
+                           android:layout_height="1dp"
+                           android:background="@color/line"
+                />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="0"
+                >
+
+                    <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:textSize="16sp"
+                            android:fontFamily="sans-serif"
+                            android:textStyle="normal"
+                            android:background="@drawable/indepth_edittext"
+                            android:textColorHint="#d1d1d1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="6dp"
+                            android:paddingLeft="14dp"
+                            android:paddingTop="9dp"
+                            android:paddingBottom="9dp"
+                            android:paddingRight="14dp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/send"
+                            android:letterSpacing="-0.01"
+                            android:hint="글을 입력해주세요."
+                    />
+
+                    <ImageView android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:src="@drawable/send"
+                               android:id="@+id/send"
+                               android:layout_margin="10dp"
+                               app:layout_constraintEnd_toEndOf="parent"
+                               app:layout_constraintTop_toTopOf="parent"
+                               app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

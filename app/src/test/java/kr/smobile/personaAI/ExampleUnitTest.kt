@@ -1,4 +1,4 @@
-package net.wepla.campus_planet
+package kr.smobile.personaAI
 
 import org.junit.Test
 

@@ -13,9 +13,6 @@
     >
 
 
-
-
-
         <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
@@ -49,14 +46,15 @@
                 android:textSize="11sp"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorPrimary"
                 android:letterSpacing="-0.02"
-                android:background="@drawable/login_button_bg"
-                android:id="@+id/followButton"
+                android:background="@drawable/landing_button"
+                android:id="@+id/messageButton"
                 app:layout_constraintTop_toTopOf="@id/profileImage"
                 app:layout_constraintBottom_toBottomOf="@id/profileImage"
                 android:gravity="center"
-                android:text="팔로우"
+                android:clickable="true"
+                android:text="메시지"
                 app:layout_constraintEnd_toEndOf="parent"
         />
 

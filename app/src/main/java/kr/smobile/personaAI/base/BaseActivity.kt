@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
 import android.annotation.TargetApi
 import android.content.Context
@@ -6,33 +6,32 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import dagger.android.AndroidInjection
-import net.wepla.campus_planet.R
-import net.wepla.campus_planet.utils.Dialog
-import net.wepla.campus_planet.utils.Function
-import net.wepla.campus_planet.utils.Intented
-import net.wepla.campus_planet.utils.MessageDialogClickListener
-import net.wepla.campus_planet.view.custom.CircularProgress
+import dagger.android.support.DaggerAppCompatActivity
+import kr.smobile.personaAI.R
+import kr.smobile.personaAI.databinding.ActionBarBinding
+import kr.smobile.personaAI.view.custom.CircularProgress
 import java.io.Serializable
 import java.util.*
 
-abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator>> : AppCompatActivity(),
+abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<*>> : DaggerAppCompatActivity(),
     BaseNavigator {
 
     lateinit var circularProgress: CircularProgress
     lateinit var mViewDataBinding: T
     lateinit var mViewModel: V
+    private var mActionbar: ActionBar? = null
     private var mActionToolbar: Toolbar? = null
     private var actionbar_title: TextView? = null
+    lateinit var actionBarBinding: ActionBarBinding
 
 
     abstract fun getBindingVariable(): Int
@@ -52,31 +51,67 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
         super.onCreate(savedInstanceState)
         performDataBinding()
         setActionbar()
+        circularProgress = CircularProgress(this)
 
     }
 
 
     private fun setActionbar() {
-        if (hasActionBar()) {
-            mActionToolbar = mViewDataBinding.root.findViewById(R.id.actionBar)
-            setSupportActionBar(mActionToolbar)
-            Objects.requireNonNull<ActionBar>(supportActionBar).setDisplayHomeAsUpEnabled(false)
-            supportActionBar!!.setHomeButtonEnabled(false)
-            supportActionBar!!.setDisplayShowTitleEnabled(false)
-            supportActionBar!!.setHomeAsUpIndicator(R.drawable.back_icon)
-
-            actionbar_title = mActionToolbar!!.findViewById<View>(R.id.actionbarTitle) as TextView
-            setActionBarTitle(getActionBarTitleId())
-
-            if (hasBackIcon()) {
-                supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-                supportActionBar!!.setHomeButtonEnabled(true)
+        if (supportActionBar != null) {
+            if (hasActionBar()) {
+                actionBarBinding = DataBindingUtil.inflate(LayoutInflater.from(this), getActionBarLayout(), null, false)
+                mActionbar = supportActionBar!!
+                mActionbar!!.customView = actionBarBinding.root
+                //setSupportActionBar(mActionToolbar)
+                Objects.requireNonNull<ActionBar>(supportActionBar).setDisplayHomeAsUpEnabled(false)
+                supportActionBar!!.setHomeButtonEnabled(false)
                 supportActionBar!!.setDisplayShowTitleEnabled(false)
                 supportActionBar!!.setHomeAsUpIndicator(R.drawable.back_icon)
-                mActionToolbar!!.setNavigationOnClickListener(View.OnClickListener { onBackPressed() })
+
+
+                setActionBarTitle(getActionBarTitleId())
+
+                if (hasBackIcon()) {
+                    supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                    supportActionBar!!.setHomeButtonEnabled(true)
+                    supportActionBar!!.setDisplayShowTitleEnabled(false)
+                    supportActionBar!!.setHomeAsUpIndicator(R.drawable.back_icon)
+                }
+
+            } else {
+                if (supportActionBar != null) {
+                    supportActionBar!!.hide()
+                }
+            }
+        } else {
+            if (hasActionBar()) {
+                mActionToolbar = mViewDataBinding.root.findViewById(R.id.actionBar)
+                if (mActionToolbar != null) {
+                    setSupportActionBar(mActionToolbar)
+                    Objects.requireNonNull<ActionBar>(supportActionBar).setDisplayHomeAsUpEnabled(false)
+                    supportActionBar!!.setHomeButtonEnabled(false)
+                    supportActionBar!!.setDisplayShowTitleEnabled(false)
+                    supportActionBar!!.setHomeAsUpIndicator(R.drawable.back_icon)
+                    actionbar_title = mActionToolbar!!.findViewById<View>(R.id.actionbarTitle) as TextView
+                    setActionBarTitle(getActionBarTitleId())
+
+                    if (hasBackIcon()) {
+                        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+                        supportActionBar!!.setHomeButtonEnabled(true)
+                        supportActionBar!!.setDisplayShowTitleEnabled(false)
+                        supportActionBar!!.setHomeAsUpIndicator(R.drawable.back_icon)
+                        mActionToolbar!!.setNavigationOnClickListener(View.OnClickListener { onBackPressed() })
+                    }
+                }
             }
 
         }
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun performDataBinding() {
@@ -94,8 +129,12 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
     }
 
 
-    protected fun getActionBarTitleId(): Int {
+    open fun getActionBarTitleId(): Int {
         return R.string.app_name
+    }
+
+    open fun getActionBarLayout(): Int {
+        return R.layout.action_bar
     }
 
 
@@ -154,7 +193,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
 
 
     fun isNetworkConnected(): Boolean {
-        return Function.checkNetworkConnection(applicationContext)
+        return kr.smobile.personaAI.utils.Function.checkNetworkConnection(applicationContext)
     }
 
     fun openActivityOnTokenExpire() {
@@ -171,7 +210,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
         startActivity(Intent(this, nextActivity))
     }
 
-    override fun openNextActivityFinish(intented: Intented) {
+    override fun openNextActivityFinish(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             val intent = Intent(this, Class.forName(intented.getName()))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -192,7 +231,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
         startActivityForResult(Intent(this, nextActivity), requestCode)
     }
 
-    override fun openNextActivity(intented: Intented) {
+    override fun openNextActivity(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             openNextActivity(Class.forName(intented.getName()))
         } catch (e: ClassNotFoundException) {
@@ -201,7 +240,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
 
     }
 
-    override fun openNextActivityClearTop(intented: Intented) {
+    override fun openNextActivityClearTop(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             val intent = Intent(this, Class.forName(intented.getName()))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -224,16 +263,16 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
     }
 
     override fun showDialogMessage(message: Int) {
-        Dialog.showMessage(supportFragmentManager, getString(message))
+        kr.smobile.personaAI.utils.Dialog.showMessage(supportFragmentManager, getString(message))
     }
 
     override fun showDialogMessage(message: String) {
-        Dialog.showMessage(supportFragmentManager, message)
+        kr.smobile.personaAI.utils.Dialog.showMessage(supportFragmentManager, message)
     }
 
     override fun showLoginRequiredDialogMessage(message: String) {
-        Dialog.showLoginRequiredDialogMessage(supportFragmentManager, message)
-            .setMessageDialogClickListener(object : MessageDialogClickListener {
+        kr.smobile.personaAI.utils.Dialog.showLoginRequiredDialogMessage(supportFragmentManager, message)
+            .setMessageDialogClickListener(object : kr.smobile.personaAI.utils.MessageDialogClickListener {
                 override fun confirmClick() {
                     openActivityOnTokenExpire()
                 }
@@ -241,8 +280,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
     }
 
     override fun showLoginRequiredDialogMessage(message: Int) {
-        Dialog.showLoginRequiredDialogMessage(supportFragmentManager, getString(message))
-            .setMessageDialogClickListener(object : MessageDialogClickListener {
+        kr.smobile.personaAI.utils.Dialog.showLoginRequiredDialogMessage(supportFragmentManager, getString(message))
+            .setMessageDialogClickListener(object : kr.smobile.personaAI.utils.MessageDialogClickListener {
                 override fun confirmClick() {
                     openActivityOnTokenExpire()
                 }
@@ -250,8 +289,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
     }
 
     override fun showDialogMessageAndFinish(message: String) {
-        Dialog.showMessage(supportFragmentManager, message)
-            .setMessageDialogClickListener(object : MessageDialogClickListener {
+        kr.smobile.personaAI.utils.Dialog.showMessage(supportFragmentManager, message)
+            .setMessageDialogClickListener(object : kr.smobile.personaAI.utils.MessageDialogClickListener {
                 override fun confirmClick() {
                     finish()
                 }
@@ -271,4 +310,15 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel<BaseNavigator
 
     }
 
+    override fun onRefreshData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun openNextActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    override fun finishActivityFromViewModel() {
+        finish()
+    }
 }

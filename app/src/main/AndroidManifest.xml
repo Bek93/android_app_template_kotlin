@@ -1,24 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:dist="http://schemas.android.com/apk/distribution"
-          package="net.wepla.campus_planet">
+          package="kr.smobile.personaAI">
 
-    <dist:module
-            dist:instant="true"/>
+    <dist:module dist:instant="true"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <application android:allowBackup="true"
-                 android:label="@string/app_name"
-                 android:icon="@mipmap/ic_launcher"
-                 android:roundIcon="@mipmap/ic_launcher_round"
-                 android:supportsRtl="true"
-                 android:name=".view.CampusApplication"
-                 android:theme="@style/AppTheme">
 
-        <activity android:name=".SplashActivity">
+    <application
+            android:name=".view.CampusApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity
+                android:name=".view.main.MainActivity"
+                android:label="@string/title_activity_main"
+                android:theme="@style/AppTheme"
+        >
+        </activity>
+        <activity
+                android:name=".SplashActivity"
+                android:theme="@style/OnBoardingTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+                android:name=".view.onboarding.LoginActivity"
+                android:theme="@style/OnBoardingTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".view.onboarding.LandingActivity"
+                android:theme="@style/OnBoardingTheme">
+        </activity>
+        <activity
+                android:name=".view.onboarding.RegisterActivity"
+                android:theme="@style/OnBoardingTheme">
+        </activity>
+        <activity
+                android:name=".view.onboarding.ForgotPasswordActivity"
+                android:theme="@style/OnBoardingTheme">
+        </activity>
+        <activity
+                android:name=".view.indepth.FindUserActivity"
+                android:theme="@style/ChatTabDetailsTheme">
+        </activity>
+        <activity
+                android:name=".view.indepth.TimelineIndepthActivity"
+                android:theme="@style/TimelineTabDetailsTheme">
+        </activity>
+        <activity
+                android:name=".view.indepth.PostLikedUserListActivity"
+                android:theme="@style/TimelineTabDetailsTheme">
+        </activity>
+        <activity
+                android:name=".view.indepth.UserProfileActivity"
+                android:theme="@style/TimelineTabDetailsTheme">
+        </activity>
+
+        <meta-data
+                android:name="io.fabric.ApiKey"
+                android:value="3fdc1c5cf85331c2b5cfceedf67e14995a4d4367"/>
     </application>
+
 </manifest>

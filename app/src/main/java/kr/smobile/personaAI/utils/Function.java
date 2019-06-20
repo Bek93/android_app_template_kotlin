@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.utils;
+package kr.smobile.personaAI.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

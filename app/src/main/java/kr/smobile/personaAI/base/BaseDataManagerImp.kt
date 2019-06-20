@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
 
 interface BaseDataManagerImp : PreferencesHelper

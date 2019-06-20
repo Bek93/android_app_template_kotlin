@@ -1,16 +1,16 @@
-package net.wepla.campus_planet.utils;
+package kr.smobile.personaAI.utils;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import dagger.android.support.AndroidSupportInjection;
-import net.wepla.campus_planet.R;
-import net.wepla.campus_planet.base.BaseDialog;
-import net.wepla.campus_planet.databinding.MessageDialogFragmentBinding;
+import kr.smobile.personaAI.base.BaseDialog;
+import kr.smobile.personaAI.databinding.MessageDialogFragmentBinding;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -86,15 +86,22 @@ public class MessageDialogFragment extends BaseDialog {
     }
 
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = MessageDialogFragmentBinding.inflate(inflater, container, false);
         AndroidSupportInjection.inject(this);
-        Objects.requireNonNull(getDialog().getWindow()).requestFeature(Window.FEATURE_NO_TITLE);
+
 
         return binding.getRoot();
 
+    }
+
+    @Override
+    public boolean isDialogShowFull() {
+        return false;
     }
 
     @Override
@@ -132,7 +139,6 @@ public class MessageDialogFragment extends BaseDialog {
                 dismiss();
                 if (messageDialogClickListener != null) {
                     messageDialogClickListener.cancelClick();
-
                 }
             }
         });
@@ -140,4 +146,14 @@ public class MessageDialogFragment extends BaseDialog {
 
 
 
+
+    @Override
+    public void openNextActivity(@NotNull Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void finishActivityFromViewModel() {
+        Objects.requireNonNull(getActivity()).finish();
+    }
 }

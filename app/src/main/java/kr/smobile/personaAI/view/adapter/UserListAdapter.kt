@@ -5,37 +5,71 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.smobile.personaAI.base.BaseViewHolder
-import kr.smobile.personaAI.databinding.ItemListTimelineBinding
-import kr.smobile.personaAI.view.indepth.TimelineIndepthActivity
-import kr.smobile.personaAI.view.model.Timeline
+import kr.smobile.personaAI.databinding.ItemFollowUserListBinding
+import kr.smobile.personaAI.databinding.ItemUserListBinding
+import kr.smobile.personaAI.model.Following
+import kr.smobile.personaAI.model.User
+import kr.smobile.personaAI.view.indepth.UserProfileActivity
 
 class UserListAdapter : RecyclerView.Adapter<BaseViewHolder>() {
-    var timelineArrayList = ArrayList<Timeline>()
+    var userArrayList = ArrayList<User>()
+    var followUserArrayList = ArrayList<Following>()
+    var TYPE = 0
+    var followerOrfollowing = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        var itemListTimelineBinding =
-            ItemListTimelineBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TimelineListViewHolder(itemListTimelineBinding)
+        return if (TYPE == 0) {
+            var itemUserListBinding =
+                ItemUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            UserViewHolder(itemUserListBinding)
+        } else {
+            var itemFollowUserListBinding =
+                ItemFollowUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            FollowUserViewHolder(itemFollowUserListBinding)
+        }
     }
 
     override fun getItemCount(): Int {
-        return timelineArrayList.size
+        return if (TYPE == 0) {
+            userArrayList.size
+        } else {
+            followUserArrayList.size
+        }
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.onBind(position)
     }
 
-    inner class TimelineListViewHolder(var itemListTimelineBinding: ItemListTimelineBinding) :
-        BaseViewHolder(itemListTimelineBinding.root) {
+    inner class UserViewHolder(var itemUserListBinding: ItemUserListBinding) :
+        BaseViewHolder(itemUserListBinding.root) {
         override fun onBind(position: Int) {
-            var timeline = timelineArrayList[position]
-            itemListTimelineBinding.timeline = timeline
-            itemListTimelineBinding.executePendingBindings()
+            var user = userArrayList[position]
+            itemUserListBinding.user = user
+            itemUserListBinding.executePendingBindings()
+            itemUserListBinding.root.setOnClickListener {
+            }
+        }
 
-            itemListTimelineBinding.root.setOnClickListener {
-                var intent = Intent(itemListTimelineBinding.root.context, TimelineIndepthActivity::class.java)
-                itemListTimelineBinding.root.context.startActivity(intent)
+    }
+
+    inner class FollowUserViewHolder(var itemFollowUserListBinding: ItemFollowUserListBinding) :
+        BaseViewHolder(itemFollowUserListBinding.root) {
+        override fun onBind(position: Int) {
+            var following = followUserArrayList[position]
+            itemFollowUserListBinding.user = following.userObject
+            itemFollowUserListBinding.executePendingBindings()
+            itemFollowUserListBinding.root.setOnClickListener {
+                var intent = Intent(itemFollowUserListBinding.root.context, UserProfileActivity::class.java)
+                intent.putExtra("color", 2)
+                intent.putExtra(
+                    "userId", if (followerOrfollowing == 0) {
+                        following.user!!.path
+                    } else {
+                        following.following_user!!.path
+                    }
+                )
+                itemFollowUserListBinding.root.context.startActivity(intent)
             }
         }
 

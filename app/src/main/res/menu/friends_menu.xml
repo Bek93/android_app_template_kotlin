@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:title="메시지 보내기"
+          android:id="@+id/menu_sent"
+    />
+
+    <item android:title="차단하기"
+          android:id="@+id/block"
+    />
 </menu>

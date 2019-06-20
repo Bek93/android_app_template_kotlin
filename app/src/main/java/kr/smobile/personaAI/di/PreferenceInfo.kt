@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.di
+package kr.smobile.personaAI.di
 
 import java.lang.annotation.Retention
 import java.lang.annotation.RetentionPolicy

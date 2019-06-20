@@ -1,4 +1,6 @@
 package kr.smobile.personaAI.view.indepth
 
-class IndepthNavigator {
+import kr.smobile.personaAI.base.BaseNavigator
+
+interface IndepthNavigator : BaseNavigator {
 }

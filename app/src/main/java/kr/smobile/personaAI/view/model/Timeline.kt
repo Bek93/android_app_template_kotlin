@@ -1,30 +1,34 @@
 package kr.smobile.personaAI.view.model
 
+import com.google.firebase.firestore.DocumentReference
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kr.smobile.personaAI.model.User
+import java.util.*
 
 class Timeline {
 
     @SerializedName("commentCount")
     @Expose
-    internal var commentCount: Int = 0
+    var commentCount: Int? = null
     @SerializedName("content_type")
     @Expose
-    internal var content_type: String? = null
+    var content_type: String? = null
     @SerializedName("expression")
     @Expose
-    internal var expression: String? = null
+    var expression: String? = null
     @SerializedName("likeCount")
     @Expose
-    internal var likeCount: Int = 0
+    var likeCount: Int? = null
     @SerializedName("status")
     @Expose
-    internal var status: Int = 0
+    var status: String? = null
     @SerializedName("timestamp")
     @Expose
-    internal var timestamp: String? = null
-    @SerializedName("user")
-    @Expose
-    internal var user: String? = null
+    var timestamp: Date? = null
+
+    var user: DocumentReference? = null
+
+    var userObject = User()
 
 }

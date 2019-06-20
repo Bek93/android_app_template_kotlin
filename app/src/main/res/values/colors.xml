@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#d9543c</color>
+    <color name="colorPrimaryDark">#d9543c</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="white">#fff</color>
+    <color name="white">#ffffff</color>
     <color name="black">#000</color>
+    <color name="chatting_bg">#e8ad0d</color>
+    <color name="timeline_bg">#89c122</color>
+    <color name="library_bg">#60b5c7</color>
+    <color name="myprofile_bg">#e5644c</color>
+    <color name="line">#d8d8d8</color>
 </resources>

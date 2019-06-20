@@ -1,19 +1,17 @@
-package net.wepla.campus_planet.utils;
+package kr.smobile.personaAI.utils;
 
 import android.content.Context;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import net.wepla.campus_planet.BuildConfig;
-import net.wepla.campus_planet.base.PreferencesManager;
-import net.wepla.campus_planet.model.AuthResponse;
+import kr.smobile.personaAI.base.PreferencesManager;
+import kr.smobile.personaAI.model.AuthResponse;
+import kr.smobile.personaAI.BuildConfig;
 import okhttp3.*;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.IOException;
 
 
 /**

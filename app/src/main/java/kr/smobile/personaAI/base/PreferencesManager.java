@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.base;
+package kr.smobile.personaAI.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,8 +6,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.multidex.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import net.wepla.campus_planet.model.AuthResponse;
-import net.wepla.campus_planet.model.Profile;
+import kr.smobile.personaAI.model.AuthResponse;
+import kr.smobile.personaAI.model.User;
 
 import javax.inject.Inject;
 import java.util.Set;
@@ -39,17 +39,27 @@ public class PreferencesManager implements PreferencesHelper {
     }
 
     @Override
-    public Profile getUser() {
-        return new Gson().fromJson((String) getValue(String.class, Key.user, ""), Profile.class);
+    public String getUserId() {
+        return (String) getValue(String.class, Key.user_id, null);
     }
 
     @Override
-    public void setUser(Profile profile) {
-        setValue(Key.user, new Gson().toJson(profile));
+    public void setUserId(String userId) {
+        setValue(Key.user_id, userId);
+    }
+
+    @Override
+    public User getUser() {
+        return new Gson().fromJson((String) getValue(String.class, Key.user, ""), User.class);
+    }
+
+    @Override
+    public void setUser(User user) {
+        setValue(Key.user, new Gson().toJson(user));
     }
 
     public enum Key {
-        accessToken, signed, device_token, user, popup_day, WIDTH
+        accessToken, signed, device_token, user, user_id, popup_day, WIDTH
     }
 
     @VisibleForTesting

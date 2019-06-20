@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.model
+package kr.smobile.personaAI.model
 
 class AuthResponse {
 }

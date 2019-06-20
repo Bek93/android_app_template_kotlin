@@ -1,18 +1,18 @@
-package net.wepla.campus_planet.di.module
+package kr.smobile.personaAI.di.module
 
 import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import net.wepla.campus_planet.BuildConfig
-import net.wepla.campus_planet.base.BaseDataManager
-import net.wepla.campus_planet.base.BaseDataManagerImp
-import net.wepla.campus_planet.base.PreferencesHelper
-import net.wepla.campus_planet.base.PreferencesManager
-import net.wepla.campus_planet.di.ApiInfo
-import net.wepla.campus_planet.di.PreferenceInfo
-import net.wepla.campus_planet.rx.AppSchedulerProvider
-import net.wepla.campus_planet.rx.SchedulerProvider
+import kr.smobile.personaAI.BuildConfig
+import kr.smobile.personaAI.base.BaseDataManager
+import kr.smobile.personaAI.base.BaseDataManagerImp
+import kr.smobile.personaAI.base.PreferencesHelper
+import kr.smobile.personaAI.base.PreferencesManager
+import kr.smobile.personaAI.di.ApiInfo
+import kr.smobile.personaAI.di.PreferenceInfo
+import kr.smobile.personaAI.rx.AppSchedulerProvider
+import kr.smobile.personaAI.rx.SchedulerProvider
 import javax.inject.Singleton
 
 /**
@@ -25,7 +25,7 @@ class AppModule {
     @Provides
     @ApiInfo
     fun provideApiKey(): String {
-        return BuildConfig.API_KEY
+        return kr.smobile.personaAI.BuildConfig.API_KEY
     }
 
 

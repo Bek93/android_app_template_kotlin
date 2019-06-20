@@ -1,15 +1,16 @@
 package kr.smobile.personaAI.view.main
 
+import kr.smobile.personaAI.base.BaseNavigator
 import kr.smobile.personaAI.utils.Tab
 
-interface MainNavigator {
+interface MainNavigator :BaseNavigator {
 
 
-    open fun onNavigationTabSelected(tab: Tab) {
+    fun onNavigationTabSelected(tab: Tab) {
 
     }
 
-    open fun hideCurrentTab(tab: Tab) {
+    fun hideCurrentTab(tab: Tab) {
 
     }
 }

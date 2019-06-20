@@ -1,7 +1,7 @@
-package net.wepla.campus_planet.view.main.data
+package kr.smobile.personaAI.data
 
 
-import net.wepla.campus_planet.base.BaseDataManagerImp
-import net.wepla.campus_planet.data.remote.MainApi
+import kr.smobile.personaAI.base.BaseDataManagerImp
+import kr.smobile.personaAI.data.remote.MainApi
 
 interface MainDataManagerImp : MainApi, BaseDataManagerImp

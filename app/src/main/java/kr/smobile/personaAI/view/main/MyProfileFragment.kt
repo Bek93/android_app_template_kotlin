@@ -5,9 +5,10 @@ import kr.smobile.personaAI.BR
 import kr.smobile.personaAI.R
 import kr.smobile.personaAI.base.BaseFragment
 import kr.smobile.personaAI.databinding.FragmentChatBinding
+import kr.smobile.personaAI.databinding.FragmentMyProfileBinding
 import javax.inject.Inject
 
-class MyProfileFragment : BaseFragment<FragmentChatBinding, MainViewModel>(), MainNavigator {
+class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MainViewModel>(), MainNavigator {
 
 
     @Inject
@@ -16,7 +17,7 @@ class MyProfileFragment : BaseFragment<FragmentChatBinding, MainViewModel>(), Ma
     override val bindingVariable: Int
         get() = BR.viewModel
     override val layoutId: Int
-        get() = R.layout.fragment_chat
+        get() = R.layout.fragment_my_profile
     override val viewModel: MainViewModel
         get() = mainViewModel
 

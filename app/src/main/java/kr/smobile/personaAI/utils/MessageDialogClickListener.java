@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.utils;
+package kr.smobile.personaAI.utils;
 
 /**
  * Created by bek on 01/08/2017.

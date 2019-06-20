@@ -1,12 +1,12 @@
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
-import net.wepla.campus_planet.rx.SchedulerProvider
+import kr.smobile.personaAI.rx.SchedulerProvider
 import java.lang.ref.WeakReference
 
-class BaseViewModel<T>(schedulerProvider: SchedulerProvider) : ViewModel() {
+open class BaseViewModel<T>(schedulerProvider: SchedulerProvider) : ViewModel() {
 
     var loading = ObservableBoolean(false)
     var schedulerProvider: SchedulerProvider? = null

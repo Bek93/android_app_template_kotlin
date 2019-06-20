@@ -8,8 +8,8 @@
 
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/dialog_background"
             android:minWidth="300dp"
             android:minHeight="200dp"
@@ -72,19 +72,21 @@
 
             <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="39dp"
+                    android:background="@color/white"
                     android:layout_weight="0">
 
-                <Button
+                <TextView
                         android:id="@+id/cancel"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:background="@drawable/whitebuttonclick"
                         android:text="@string/meta_cancel"
+                        android:clickable="true"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="13sp"/>
 
                 <ImageView
                         android:layout_width="1dp"
@@ -93,16 +95,17 @@
                         android:layout_marginBottom="7dp"
                         android:background="#e0e3e8"/>
 
-                <Button
+                <TextView
                         android:id="@+id/confirm"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="?attr/selectableItemBackground"
+                        android:background="@drawable/whitebuttonclick"
                         android:text="@string/meta_done"
+                        android:clickable="true"
+                        android:gravity="center"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        android:textSize="13sp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

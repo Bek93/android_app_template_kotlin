@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="?android:colorControlHighlight">
+    <item>
 
-</selector>
+        <shape>
+            <corners android:radius="28dp"/>
+            <stroke android:color="@color/colorPrimary" android:width="1dp"/>
+            <solid android:color="@color/colorPrimary"/>
+        </shape>
+
+    </item>
+</ripple>

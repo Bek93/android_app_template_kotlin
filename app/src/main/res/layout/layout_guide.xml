@@ -4,4 +4,23 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/guide_icon"
+               android:layout_gravity="center"
+    />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="40dp"
+            android:textStyle="normal"
+            android:textColor="#d9543c"
+            android:letterSpacing="-0.02"
+            android:id="@+id/title"
+            android:gravity="center_horizontal"
+            android:text="그리고 말로 표정을 담아 표현하는 주인공이 바로 당신의 페르소나 입니다."
+    />
 </LinearLayout>

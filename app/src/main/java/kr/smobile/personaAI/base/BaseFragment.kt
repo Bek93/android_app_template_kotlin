@@ -1,4 +1,4 @@
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
 
 import android.content.Context
@@ -12,10 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import dagger.android.support.AndroidSupportInjection
-import net.wepla.campus_planet.utils.Dialog
-import net.wepla.campus_planet.utils.Intented
-import net.wepla.campus_planet.utils.MessageDialogClickListener
-
+import kr.smobile.personaAI.utils.Dialog
+import kr.smobile.personaAI.utils.MessageDialogClickListener
 import java.io.Serializable
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragment(), BaseNavigator {
@@ -132,7 +130,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
         startActivity(Intent(context, nextActivity))
     }
 
-    override fun openNextActivityFinish(intented: Intented) {
+    override fun openNextActivityFinish(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             val intent = Intent(context, Class.forName(intented.getName()))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -153,7 +151,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
         startActivityForResult(Intent(context, nextActivity), requestCode)
     }
 
-    override fun openNextActivity(intented: Intented) {
+    override fun openNextActivity(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             openNextActivity(Class.forName(intented.getName()))
         } catch (e: ClassNotFoundException) {
@@ -163,7 +161,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
     }
 
 
-    override fun openNextActivityClearTop(intented: Intented) {
+    override fun openNextActivityClearTop(intented: kr.smobile.personaAI.utils.Intented) {
         try {
             val intent = Intent(context, Class.forName(intented.getName()))
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -198,8 +196,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
 
 
     override fun showDialogMessageAndFinish(message: String) {
-        Dialog.showMessage(childFragmentManager, message)
-            .setMessageDialogClickListener(object : MessageDialogClickListener{
+        kr.smobile.personaAI.utils.Dialog.showMessage(childFragmentManager, message)
+            .setMessageDialogClickListener(object : MessageDialogClickListener {
                 override fun confirmClick() {
                     baseActivity!!.finish()
                 }
@@ -208,6 +206,15 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel<*>> : Fragmen
 
                 }
             })
+    }
+
+
+    override fun openNextActivity(intent: Intent) {
+        startActivity(intent)
+    }
+
+    override fun finishActivityFromViewModel() {
+        activity!!.finish()
     }
 
 

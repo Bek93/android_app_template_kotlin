@@ -1,8 +1,8 @@
-package net.wepla.campus_planet.base
+package kr.smobile.personaAI.base
 
 import android.content.Context
-import net.wepla.campus_planet.model.AuthResponse
-import net.wepla.campus_planet.model.Profile
+import kr.smobile.personaAI.model.AuthResponse
+import kr.smobile.personaAI.model.User
 
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -10,6 +10,13 @@ import javax.inject.Singleton
 @Singleton
 open class BaseDataManager @Inject
 constructor(private val context: Context, private val preferencesManager: PreferencesManager) : BaseDataManagerImp {
+    override fun getUserId(): String {
+        return preferencesManager.getUserId()
+    }
+
+    override fun setUserId(userId: String?) {
+        return preferencesManager.setUserId(userId)
+    }
 
     override fun getAccessToken(): AuthResponse {
         return preferencesManager.accessToken
@@ -27,11 +34,11 @@ constructor(private val context: Context, private val preferencesManager: Prefer
         preferencesManager.setSignedIn(signedIn)
     }
 
-    override fun getUser(): Profile {
+    override fun getUser(): User {
         return preferencesManager.user
     }
 
-    override fun setUser(user: Profile) {
+    override fun setUser(user: User) {
         preferencesManager.setUser(user)
     }
 

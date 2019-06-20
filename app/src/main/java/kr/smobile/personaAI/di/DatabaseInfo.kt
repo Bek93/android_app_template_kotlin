@@ -14,7 +14,7 @@
  *  limitations under the License
  */
 
-package net.wepla.campus_planet.di
+package kr.smobile.personaAI.di
 
 import javax.inject.Qualifier
 import java.lang.annotation.Retention

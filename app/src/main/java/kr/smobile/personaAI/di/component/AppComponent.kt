@@ -1,12 +1,12 @@
-package net.wepla.campus_planet.di.component
+package kr.smobile.personaAI.di.component
 
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
-import net.wepla.campus_planet.view.CampusApplication
-import net.wepla.campus_planet.di.builder.ActivityBuilder
-import net.wepla.campus_planet.di.module.AppModule
+import kr.smobile.personaAI.view.CampusApplication
+import kr.smobile.personaAI.di.builder.ActivityBuilder
+import kr.smobile.personaAI.di.module.AppModule
 import javax.inject.Singleton
 
 /**
