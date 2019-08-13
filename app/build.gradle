@@ -36,14 +36,12 @@ android {
         debug {
             applicationIdSuffix '.internal'
             buildConfigField "String", "API_KEY", "\"LuZx2AlKHPVeBivHSkzltQYr9cGBmIKD\""
-            buildConfigField "String", "BASE_URL", "\"https://api-dev.campusplanet.link\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             applicationIdSuffix '.internal'
             buildConfigField "String", "API_KEY", "\"LuZx2AlKHPVeBivHSkzltQYr9cGBmIKD\""
-            buildConfigField "String", "BASE_URL", "\"https://api-dev.campusplanet.link\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

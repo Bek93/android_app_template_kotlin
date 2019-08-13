@@ -9,17 +9,21 @@ import java.lang.ref.WeakReference
 open class BaseViewModel<T>(schedulerProvider: SchedulerProvider) : ViewModel() {
 
     var loading = ObservableBoolean(false)
-    var schedulerProvider: SchedulerProvider? = null
+    var schedulerProvider: SchedulerProvider
+        get() = schedulerProvider
+        set(value) {
+            schedulerProvider = value
+        }
     var compositeDisposable: CompositeDisposable
-    lateinit var mNavigator: WeakReference<T>
-
-    fun setNavigator(navigator: T) {
-        mNavigator = WeakReference<T>(navigator)
-    }
-
-    fun getNavigator(): T {
-        return mNavigator.get()!!
-    }
+        get() = compositeDisposable;
+        set(value) {
+            compositeDisposable = value
+        }
+    var navigator: WeakReference<T>
+        get() = navigator;
+        set(value) {
+            this.navigator = value
+        }
 
     init {
         this.schedulerProvider = schedulerProvider
@@ -39,5 +43,6 @@ open class BaseViewModel<T>(schedulerProvider: SchedulerProvider) : ViewModel() 
     fun setLoading(isLoading: Boolean) {
         loading.set(isLoading)
     }
+
 
 }

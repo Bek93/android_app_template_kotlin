@@ -1,9 +1,8 @@
 package kr.smobile.personaAI.di.module
 
-import android.app.Application
-import android.content.Context
 import dagger.Module
 import dagger.Provides
+<<<<<<< HEAD:app/src/main/java/kr/smobile/personaAI/di/module/AppModule.kt
 import kr.smobile.personaAI.BuildConfig
 import kr.smobile.personaAI.base.BaseDataManager
 import kr.smobile.personaAI.base.BaseDataManagerImp
@@ -14,6 +13,10 @@ import kr.smobile.personaAI.di.PreferenceInfo
 import kr.smobile.personaAI.rx.AppSchedulerProvider
 import kr.smobile.personaAI.rx.SchedulerProvider
 import javax.inject.Singleton
+=======
+import net.wepla.campus_planet.BuildConfig
+import net.wepla.campus_planet.di.ApiInfo
+>>>>>>> parent of 78c8240... Updated template:app/src/main/java/net/wepla/campus_planet/di/module/AppModule.kt
 
 /**
  * @author Created by Bek on 25/03/2019
@@ -26,37 +29,6 @@ class AppModule {
     @ApiInfo
     fun provideApiKey(): String {
         return kr.smobile.personaAI.BuildConfig.API_KEY
-    }
-
-
-    @Provides
-    @Singleton
-    internal fun provideContext(application: Application): Context {
-        return application
-    }
-
-    @Provides
-    @Singleton
-    internal fun provideDataManager(appDataManager: BaseDataManager): BaseDataManagerImp {
-        return appDataManager
-    }
-
-
-    @Provides
-    @PreferenceInfo
-    internal fun providePreferenceName(): String {
-        return PreferencesManager.PREF_NAME
-    }
-
-    @Provides
-    @Singleton
-    internal fun providePreferencesHelper(appPreferencesHelper: PreferencesHelper): PreferencesHelper {
-        return appPreferencesHelper
-    }
-
-    @Provides
-    internal fun provideSchedulerProvider(): SchedulerProvider {
-        return AppSchedulerProvider()
     }
 
 }
